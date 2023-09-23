@@ -1,0 +1,68 @@
+public static void main(String[] args) {
+          int[] deck = new int[52];
+          String[] cards = new String[4];
+          boolean[] picked = {false, false, false, false};
+          boolean finished = false;
+          int count = 0;
+          String[] suits = {"Spades", "Hearts", "Diamonds", "Clubs"};
+          String[] ranks = {"Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King"};
+          
+          for (int i = 0; i < deck.length; i++) {
+              deck[i] = i;
+          }
+          
+          while (finished == false) {
+            count++;
+            int cardNum = (int)(Math.random() * deck.length);
+            String suit = suits[deck[cardNum] / 13];
+            String rank = ranks[deck[cardNum] % 13];
+            if ("Spades".equals(suit) && picked[0] == false) {
+                picked[0] = true;
+                String card;
+                card = rank + " of " + suit;
+                cards[0] = card;
+            }
+            if ("Hearts".equals(suit) && picked[1] == false) {
+                picked[1] = true;
+                String card;
+                card = rank + " of " + suit;
+                cards[1] = card;
+            }
+            if ("Diamonds".equals(suit) && picked[2] == false) {
+                picked[2] = true;
+                String card;
+                card = rank + " of " + suit;
+                cards[2] = card;
+            }
+            if ("Clubs".equals(suit) && picked[3] == false) {
+                picked[3] = true;
+                String card;
+                card = rank + " of " + suit;
+                cards[3] = card;
+            }
+            for (int i = 0; i < 4; i++) {
+                if (picked[i] == false) {
+                    finished = false;
+                    break;
+                } else {
+                    finished = true;
+                }
+            }
+            
+            deck = shuffle(deck);
+          }   
+          for (int i = 0; i < 4; i++) {
+              System.out.println(cards[i]);
+          }
+          System.out.println("Number of picks: " + count);
+      }
+      
+      public static int[] shuffle(int[] deck) {
+          for (int i = 0; i < deck.length; i++) {
+              int index = (int)(Math.random() * deck.length);
+              int temp = deck[i];
+              deck[i] = deck[index];
+              deck[index] = temp;
+          }
+          return deck;
+      }
