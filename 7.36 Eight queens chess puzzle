@@ -1,0 +1,98 @@
+public static void main(String[] args) {
+         char[] board = new char[64];
+         int count = 0;
+         int index = 0;
+         for (int i = 0; i < 64; i++)
+             if (i < 8) board[i] = 'Q'; else board[i] = ' ';
+
+         while (checkmate(board) == false) {
+             count++;
+             shuffle(board);
+         }
+         
+         for (int i = 0; i < 8; i++) {
+             System.out.print("|");
+             for (int j = 0; j < 8; j++) {
+                 System.out.print(board[index] + "|");
+                 index++;
+                 
+             }
+             System.out.println();
+         }
+         for (int i = 0; i < 8; i++) {
+              index = i * 8;
+              for (int j = 0; j < 8; j++) {
+                  if (board[index] == 'Q') break;
+                  index++;
+              }
+              System.out.println("There is a queen at " + index);
+     }
+     System.out.println(count + " shuffles");
+     }
+     public static boolean checkmate(char[] board) {
+         int index = 0;
+         for (int i = 0; i < 8; i++) {
+             int queens = 0;
+             for (int j = 0; j < 8; j++) {
+                 if (board[index] == 'Q')
+                     queens++;
+                 index++;
+             }
+             if (queens > 1) return false;
+         }
+         for (int i = 0; i < 8; i++) {
+             int queens = 0;
+             for (int j = i; j < 64; j += 8) {
+                 if (board[j] == 'Q') queens++;
+             }
+             if (queens > 1) return false;
+         }
+         
+          for (int i = 0; i < 8; i++) {
+              index = i * 8;
+              for (int j = 0; j < 8; j++) {
+                  if (board[index] == 'Q') break;
+                  index++;
+              }
+              
+              if (i > 0) {
+                  int leftDiagonal = index - 9;
+                  int rightDiagonal = index - 7;
+                  if (index % 8 == 0) {
+                      while (rightDiagonal >= 0) {
+                           if (board[index] == 'Q' && board[rightDiagonal] == 'Q') return false; 
+                           if ((rightDiagonal + 1) % 8 == 0) break;
+                           rightDiagonal -= 7;
+                        }
+                 } else if ((index + 1) % 8 == 0) {
+                      while (leftDiagonal >= 0) {
+                           if (board[index] == 'Q' && board[leftDiagonal] == 'Q') return false;
+                           if (leftDiagonal % 8 == 0) break;
+                           leftDiagonal -= 9;
+                        }
+                  } else {
+                    while (leftDiagonal >= 0) {
+                        if (board[index] == 'Q' && board[leftDiagonal] == 'Q') return false; 
+                        if (leftDiagonal % 8 == 0) break;
+                        leftDiagonal -= 9;
+                    }
+                    while (rightDiagonal >= 0) {                                             
+                        if (board[index] == 'Q' && board[rightDiagonal] == 'Q') return false;     
+                        if ((rightDiagonal + 1) % 8 == 0) break;
+                        rightDiagonal -= 7;
+                    }
+                 }
+              }
+          }
+         return true; 
+     }
+     
+     public static char[] shuffle(char[] board) {
+          for (int i = 0; i < board.length; i++) {
+              int index = (int)(Math.random() * board.length);
+              char temp = board[i];
+              board[i] = board[index];
+              board[index] = temp;
+          }
+          return board;
+      }
