@@ -1,0 +1,46 @@
+public static void main(String[] args) {
+         Scanner input = new Scanner(System.in);
+         System.out.print("Enter the size of the list: ");
+         int[] list = new int[input.nextInt()];
+         
+         System.out.print("Enter elements of the list: ");
+         for (int i = 0; i < list.length; i++)
+             list[i] = input.nextInt();
+         
+         partition(list);
+         for (int i = 0; i < list.length; i++)
+             System.out.print(list[i] + " ");
+     }
+     
+     public static int[] partition(int[] list) {
+         boolean swapped = true;
+         int pivot = 0;
+         int i = list.length - 1;
+         boolean partitioned = isPartitioned(list, pivot);
+         while (partitioned == false) {
+             if (list[i] <= list[pivot]) {
+                 int temp = list[pivot];
+                 list[pivot] = list[i];
+                 for (int j = i; j > pivot; j--) {
+                     list[j] = list[j - 1];
+                 }
+                 list[pivot + 1] = temp;
+                 pivot++;
+            } else if (i > pivot)  {
+                 i--;
+            } else { 
+                break;
+            }
+            partitioned = isPartitioned(list, pivot);
+         }
+      
+         return list;
+     }
+     
+     public static boolean isPartitioned(int[] list, int pivot) {
+         for (int i = list.length - 1; i > pivot; i--) {
+             if (list[i] < list[pivot])
+                     return false;
+         }
+         return true;
+     }
