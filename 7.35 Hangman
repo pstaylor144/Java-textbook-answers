@@ -1,0 +1,52 @@
+public static void main(String[] args) {
+         Scanner input = new Scanner(System.in);
+         String[] words = {"yira", "perry", "kristine", "joseph", "samuel", "julian", "alexander"};
+         int index = (int)(Math.random() * words.length);
+         char[] word = new char[words[index].length()];
+         for (int i = 0; i < words[index].length(); i++)
+             word[i] = '*';
+         while (true) {
+            System.out.print("Enter a letter in word ");
+            for (char e : word) {
+                System.out.print(e);
+            }
+            System.out.print(": ");
+            char letter;
+            letter = input.next().charAt(0);
+            word = sort(words[index], word, letter);
+            for (int i = 0; i < word.length; i++) {
+                if (word[i] == '*') {
+                    break;
+                } else if (i == word.length - 1) { 
+                    System.out.println("The word is " + words[index]);
+                    System.exit(0);
+                }    
+            }
+         }
+     }
+     
+     public static char[] sort(String answer, char[] word, char letter) {
+         boolean containsLetter = false;
+         for (int i = 0; i < answer.length(); i++) {
+             if (letter == answer.charAt(i)) {
+                 containsLetter = true;
+             }
+         }
+         if (containsLetter == false) {
+             System.out.println(letter + " is not in the word");
+         } else {
+             for (char e: word) {
+                 if (letter == e) {
+                     System.out.println(letter + " is already in the word");
+                     return word;
+                 }
+             }
+             for (int i = 0; i < answer.length(); i++) {
+                 char fill = answer.charAt(i);
+                 if (letter == answer.charAt(i)) 
+                     word[i] = answer.charAt(i);
+             }
+         }
+      
+         return word;      
+     }
