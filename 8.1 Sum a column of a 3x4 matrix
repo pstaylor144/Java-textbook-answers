@@ -1,0 +1,17 @@
+public static void main(String[] args) {
+         Scanner input = new Scanner(System.in);
+         double[][] array = new double[3][4];
+         System.out.println("Enter a 3x4 matrix row by row:");
+         for (int i = 0; i < 3; i++) {
+             for (int j = 0; j < 4; j++) array[i][j] = input.nextDouble();
+         }
+         System.out.print("Enter the column index: ");
+         int columnIndex = input.nextInt();
+         System.out.println("Sum of the elements at column " + columnIndex + " is " + sumColumn(array, columnIndex));
+     }
+     
+     public static double sumColumn(double[][] m, int columnIndex) {
+         double sum = 0;
+         for (int i = 0; i < 3; i++) sum += m[i][columnIndex];
+         return sum;
+     }
