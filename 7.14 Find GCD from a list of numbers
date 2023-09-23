@@ -1,0 +1,35 @@
+Scanner input = new Scanner(System.in);
+          int[] nums = new int[5];
+          System.out.print("Enter 5 numbers: ");
+          for (int i = 0; i < 5; i++) {
+              nums[i] = input.nextInt();
+          }
+           
+          System.out.println(gcd(nums));
+      }
+      
+      public static int gcd(int... numbers) {
+          int gcd = 0;
+          int div = 0;
+          int max = 0;
+          for (int i = 0; i < numbers.length; i++) {
+              if (numbers[i] > max) {
+                  max = numbers[i];
+              }
+          }
+          
+          for (int i = 1; i <= max / 2; i++) {
+              for (int j = 0; j < numbers.length; j++) {
+                  if (numbers[j] % i == 0) {
+                      div = i;
+                  } else {
+                      div = 0;
+                      break;
+                  }
+               }
+              if (div > 0 && div > gcd) {
+                  gcd = div;
+              }
+          }
+          return gcd;
+      }
