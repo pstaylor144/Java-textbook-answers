@@ -1,0 +1,54 @@
+public static void main(String[] args) {
+         Scanner input = new Scanner(System.in);
+         System.out.print("Enter the number of balls to drop: ");
+         int balls = input.nextInt();
+         System.out.print("Enter the number of slots in the bean machine: ");
+         int[] slots = new int[input.nextInt()];
+         for (int i = 0; i < slots.length; i++) slots[i] = 0;
+         
+         for (int i = 0; i < balls; i++) {
+             int slot = dropBalls(slots);
+             slots[slot] += 1;
+         }
+         int max = 0;
+         for (int i = 0; i < slots.length; i++) 
+             if (slots[i] > max) max = slots[i];
+         for (int i = max; i >= 1; i--) {
+             for (int j = 0; j < slots.length; j++) {
+                 if (slots[j] == i) {
+                     System.out.print("O");
+                     slots[j] -= 1;
+                 }
+                 else System.out.print(" ");
+             }
+             System.out.println();
+         }
+         for (int i = 0; i < slots.length; i++) {
+             System.out.print(i);
+         }
+         System.out.println();
+     }
+     
+     public static int dropBalls(int[] slots) {
+         int row = 0;
+         int start = 1;
+         while (row < slots.length) {
+             row++;
+             start += row - 1;
+         }
+         int position = 1;
+         int balls = 2;
+         while (balls <= slots.length) {
+             int prob = (int)Math.round(Math.random());
+             if (prob == 0) {
+                 System.out.print("L");
+                 position += balls - 1;
+             } else {
+                 System.out.print("R");
+                 position += balls;
+             }
+             balls++;
+         }
+         System.out.println();
+         return position - start;
+     }
