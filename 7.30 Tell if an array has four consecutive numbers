@@ -1,0 +1,23 @@
+public static void main(String[] args) {
+         Scanner input = new Scanner(System.in);
+         System.out.print("Enter the number of values: ");
+         int[] values = new int[input.nextInt()];
+         System.out.print("Enter the values: ");
+         for (int i = 0; i < values.length; i++)
+             values[i] = input.nextInt();
+         
+         System.out.println(isConsecutiveFour(values));
+    }
+     
+     public static boolean isConsecutiveFour(int[] values) {
+         // make i go up by 1 instead of 4
+         for (int i = 0; i < values.length; i += 1) {
+             for (int j = i + 1; j < i + 4 && j < values.length; j++) {
+                 if (values[i] != values[j]) 
+                     break;
+                 if (j == i + 3)
+                    return true;
+             }
+         }
+         return false;
+     }
