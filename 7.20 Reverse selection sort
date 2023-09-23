@@ -1,0 +1,28 @@
+public static void main(String[] args) {
+          Scanner input = new Scanner(System.in); 
+          double[] numbers = new double[10]; 
+          System.out.print("Enter the contents of the list: "); 
+          for (int i = 0; i < 10; i++)
+                numbers[i] = input.nextDouble();
+          selectionSort(numbers);
+          for (int i = 0; i < 10; i++)
+                System.out.print(numbers[i] + " ");
+      }
+      
+      public static void selectionSort(double[] list) {
+            double temp;
+            int index = list.length - 1;
+            int max = list.length - 1;
+            while (index != 0) {
+                for (int i = 1; i <= index; i++) {
+                        if (list[index - i] > list[index] && list[index - i] > list[max]) {
+                                max = index - i;           
+                        }
+                }
+                temp = list[index];
+                list[index] = list[max];
+                list[max] = temp;
+                index--;
+                max = index;
+            }
+    }
