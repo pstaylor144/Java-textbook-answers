@@ -1,0 +1,58 @@
+public static void main(String[] args) {
+         Scanner input = new Scanner(System.in);
+         double[][] m1 = new double[3][3];
+         double[][] m2 = new double[3][3];
+         System.out.print("Enter the first matrix: ");
+         for (int i = 0; i < 3; i++) {
+             for (int j = 0; j < 3; j++) m1[i][j] = input.nextDouble();
+         }
+         
+         System.out.print("Enter the second matrix: ");
+         for (int i = 0; i < 3; i++) {
+             for (int j = 0; j < 3; j++) m2[i][j] = input.nextDouble();
+         }
+         
+         double[][] product = multiplyMatrix(m1, m2);
+         
+         System.out.println("The multiplication of the matrices is");
+         int middleRow = Math.round(m1.length / 2);
+         for (int i = 0; i < m1.length; i++) {
+             for (int j = 0; j < m1.length; j++) {
+                 System.out.print(m1[i][j] + " ");
+             }
+             if (i == middleRow) System.out.print("* ");
+             else System.out.print("  ");
+             
+             for (int j = 0; j < m2.length; j++) {
+                 System.out.print(m2[i][j] + " ");
+             }
+             if (i == middleRow) System.out.print("= ");
+             else System.out.print("  ");
+             
+             for (int j = 0; j < product.length; j++) {
+                 System.out.print(product[i][j]+ " ");
+             }
+             System.out.println();
+         }
+      }
+     
+     public static double[][] multiplyMatrix(double [][] a, double[][] b) {
+         double[][] c = new double[a.length][a.length];
+         for (int i = 0; i < 3; i++) {
+             int columnIndex = 0;
+             double sum = 0;
+             for (int j = 0; j < 3; j++) {
+                 int rowIndex = 0;
+                 for (int k = 0; k < 3; k++) {
+                     sum += a[i][rowIndex] * b[k][columnIndex];
+                     //System.out.println(a[i][rowIndex] + " multiplied by " + b[k][columnIndex] + " is " + a[i][rowIndex] * b[k][columnIndex]);
+                     rowIndex++;
+                 }
+                 //System.out.println("Result of first loop: " + sum);
+                 c[i][j] = sum;
+                 sum = 0;
+                 columnIndex++;
+             }
+         }
+         return c;
+     }
