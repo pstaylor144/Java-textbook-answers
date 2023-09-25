@@ -1,0 +1,23 @@
+public static void main(String[] args) {
+         int[][] m = {{1, 2}, {3, 4}, {5, 6}, {7, 8}, {9, 10}};
+         System.out.print("Before shuffling: ");
+         for(int[] r: m) System.out.print(Arrays.toString(r) + " ");
+         System.out.println();
+         int[] rows = new int[m.length];
+         for (int i = 0; i < m.length; i++) rows[i] = m[i][0];
+         shuffle(rows);
+         for (int i = 0; i < m.length; i++) m[i][0] = rows[i];
+         System.out.print("After shuffling: ");
+         for(int[] r: m) System.out.print(Arrays.toString(r) + " ");
+         System.out.println();
+     }
+     
+     public static int[] shuffle(int[] rows) {
+          for (int i = 0; i < rows.length; i++) {
+              int index = (int)(Math.random() * rows.length);
+              int temp = rows[i];
+              rows[i] = rows[index];
+              rows[index] = temp;
+          }
+          return rows;
+      }
