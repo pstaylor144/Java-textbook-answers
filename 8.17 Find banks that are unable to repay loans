@@ -1,0 +1,89 @@
+public static void main(String[] args) {
+         Scanner input = new Scanner(System.in);
+         System.out.print("Enter the number of banks and the limit for total assets: ");      
+         int n = input.nextInt();
+         int limit = input.nextInt();
+         double[][] banks = new double[n][10];
+         for(int i = 0; i < n; i++) {
+             System.out.print("Enter the balance, number of borrowers, and pairs of borrower ID and the amount borrowed for bank " + i +": ");
+             double balance = input.nextDouble();
+             int borrowers = input.nextInt();
+             banks[i][0] = balance;
+             banks[i][1] = borrowers;
+             for (int j = 2; j < ((borrowers * 2) + 2); j+=2) {
+                 banks[i][j] = input.nextInt();
+                 banks[i][j + 1] = input.nextDouble();
+             }
+         }
+         
+         int[] unsafeBanks = new int[n];
+         for (int i = 0; i < unsafeBanks.length; i++) {
+             unsafeBanks[i] = -1;
+         }
+         
+         for (int i = 0; i < banks.length; i++) {
+             double totalAssets = banks[i][0];
+             for (int j = 3; j < banks[i].length; j+= 2) {
+                 totalAssets +=  banks[i][j];
+                   
+             } 
+             if (totalAssets < 201) {
+                    for (int k = 0; k < unsafeBanks.length; k++) {
+                        if (unsafeBanks[k] == -1) unsafeBanks[k] = i;
+                        break;
+                    }
+             }  
+         }
+         
+         for (int i = 0; i < unsafeBanks.length; i++) {
+             if (unsafeBanks[i] != -1) break;
+             if (i == (unsafeBanks.length - 1)) {
+                 System.out.println("No unsafe banks");
+                 System.exit(0);
+             }
+         }
+         
+         boolean changed = true;
+         while (changed) {
+             int initialSize = 0;
+             for (int i = 0; i < unsafeBanks.length; i++) {
+                 if (unsafeBanks[i] == -1) initialSize++;
+             }
+             boolean isUnsafe = false;
+             for (int i = 0; i < banks.length; i++) {
+                 for (int k = 0; k < unsafeBanks.length; k++) {
+                         if (unsafeBanks[k] == i) isUnsafe = true;
+                 }
+                 if (isUnsafe == true) continue;
+                 double totalAssets = banks[i][0];
+                 for (int j = 2; j < banks[i].length; j += 2) {
+                     boolean valid = true;
+                     for (int k = 0; k < unsafeBanks.length; k++) {
+                         if (unsafeBanks[k] == banks[i][j]) valid = false;
+                     }
+                     if (valid == true) totalAssets += banks[i][j + 1];
+                 }
+                 if (totalAssets < 201) {
+                     for (int k = 0; k < unsafeBanks.length; k++) {
+                         if (unsafeBanks[k] == -1) {
+                             unsafeBanks[k] = i;
+                             break;
+                         }
+                         
+                     }
+                 }
+             }
+             int counter = 0;
+             for (int i = 0; i < unsafeBanks.length; i++) {
+                 if (unsafeBanks[i] == -1) counter++;
+             }
+             
+             if (initialSize == counter) changed = false;
+         }
+         
+         System.out.print("Unsafe banks are ");
+         for (int b: unsafeBanks) {
+             if (b != -1) System.out.print(b + " ");
+         }
+         System.out.println();
+     }
