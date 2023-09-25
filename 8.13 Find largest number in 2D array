@@ -1,0 +1,33 @@
+public static void main(String[] args) {
+         Scanner input = new Scanner(System.in);
+         System.out.print("Enter the number of rows in the array: ");
+         int rows = input.nextInt();
+         System.out.print("Enter the number of columns in the array: ");
+         int columns = input.nextInt();
+         double[][] matrix = new double[rows][columns];
+         System.out.println("Enter the array:");
+         for (int i = 0; i < rows; i++) {
+             for (int j = 0; j < columns; j++) {
+                 matrix[i][j] = input.nextDouble();
+             }
+         }
+         
+         int[] largest = locateLargest(matrix);
+         
+         System.out.println("The location of the largest element is at (" + largest[0] + ", " + largest[1] + ")");
+     }
+     
+     public static int[] locateLargest(double[][] a) {
+         int[] array = new int[2];
+         double max = 0;
+         for (int i = 0; i < a.length; i++) {
+             for (int j = 0; j < a[i].length; j++) {
+                 if (a[i][j] > max) {
+                     max = a[i][j];
+                     array[0] = i;
+                     array[1] = j;
+                 }
+             }
+         }
+         return array;
+     }
