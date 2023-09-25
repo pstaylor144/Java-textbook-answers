@@ -1,0 +1,64 @@
+public static void main(String[] args) {
+         Scanner input = new Scanner(System.in);
+         System.out.print("Enter the size for the square: ");
+         int size = input.nextInt();
+         int[][] matrix = new int[size][size];
+         boolean hasRowMatch = false;
+         boolean hasColumnMatch = false;
+         for (int i = 0; i < size; i++) {
+             for (int j = 0; j < size; j++) {
+                 int element = (int)(Math.round(Math.random()));
+                 matrix[i][j] = element;
+                 System.out.print(element);
+             }
+             System.out.println();
+         }
+         
+         for (int i = 0; i < size; i++) {
+             boolean match = false;
+             for (int j = 1; j < size; j++) {
+                 if (matrix[i][j] == matrix[i][0]) match = true;
+                 else {
+                     match = false;
+                     break;
+                 }
+             }
+             if (match == true) {
+                 hasRowMatch = true;
+                 System.out.println("All " + matrix[i][0] + "s on row " + (i + 1));
+             }
+         }
+         
+         for (int i = 0; i < size; i++) {
+             boolean match = false;
+             for (int j = 1; j < size; j++) {
+                 if (matrix[j][i] == matrix[0][i]) match = true;
+                 else {
+                     match = false;
+                     break;
+                 }
+             }
+             if (match == true) {
+                 hasColumnMatch = true;
+                 System.out.println("All " + matrix[0][i] + "s on column " + (i+1));
+             }
+         }
+         if (hasRowMatch == false) System.out.println("No same numbers on a row");
+         
+         if (hasColumnMatch == false) System.out.println("No same numbers on a column");
+         
+         for (int i = 1; i < size; i++) {
+             if (matrix[i][i] != matrix[0][0]) {
+                 System.out.println("No same numbers on the major diagonal");
+                 break;
+             } else if (i == (size - 1)) System.out.println("All " + matrix[0][0] + "s on the major diagonal");
+         }
+         
+         for (int i = 1; i < size; i++) {
+             if (matrix[(size - 1) - i][i] != matrix[size - 1][0]) {
+                 System.out.println("No same numbers on the sub-diagonal");
+                 break;
+             } else if (i == size - 1) System.out.println("All " + matrix[size - 1][0] + "s on the sub-diagonal");
+             
+         }
+     }
