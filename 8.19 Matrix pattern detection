@@ -1,0 +1,86 @@
+public static void main(String[] args) {
+         Scanner input = new Scanner(System.in);
+         System.out.print("Enter the number of rows: ");
+         int rows = input.nextInt();
+         System.out.print("Enter the number of columns: ");
+         int columns = input.nextInt();
+         if (rows <=0 || columns <= 0) System.exit(0);
+         int[][] matrix = new int[rows][columns];
+         for (int[] matrix1 : matrix) {
+             for (int j = 0; j < columns; j++) {
+                 matrix1[j] = (int)(Math.random() * 10);
+             }
+         }
+         if (rows < 4 && columns < 4) {
+            System.out.println("There are not 4 consecutive numbers of the same value");
+            System.exit(0);
+         } 
+         int counter = 0;
+         while (isConsecutiveFour(matrix) == false) {
+             for (int[] matrix1 : matrix) {
+                for (int j = 0; j < columns; j++) {
+                 matrix1[j] = (int)(Math.random() * 10);
+                }
+             }
+             counter++;
+         }
+         
+         for (int[] a: matrix) {
+             for (int n: a) System.out.print(n + " ");
+             System.out.println();
+         }
+         System.out.println(counter + " iterations");
+      }
+     
+     public static boolean isConsecutiveFour(int[][] values) { 
+         if (values[0].length >= 4) {
+            for (int[] value : values) {
+                for (int j = 0; j < value.length; j+=4) {
+                    if (j + 3 >= value.length) break;
+                    else if (value[j] == value[j+1] && value[j] == value[j+2] && value[j] == value[j+3]) {
+                        return true;
+                    }
+                }
+            }
+         }
+ 
+         if (values.length >= 4) {
+            for (int i = 0; i < values[0].length; i++) {
+                for (int j = 0; j < values.length; j+=4) {
+                    if (j + 3 >= values.length) break;
+                    else if (values[j][i] == values[j + 1][i] && values[j][i] == values[j + 2][i] && values[j][i] == values[j + 3][i]) return true;
+                }
+            }
+         }
+         
+         if (values.length >= 4 && values[0].length >= 4) {
+             for (int i = 0; i < values.length; i++) {
+                 if (i + 3 >= values.length) break;
+                 for (int j = 0; j < 3; j++) {
+                     if (j + 3 >= values[0].length) break;
+                     else if (values[i][j] == values[i + 1][j + 1] && values[i][j] == values[i + 2][j + 2] && values[i][j] == values[i + 3][j + 3]) return true;
+                     
+                 }
+             }
+         }
+         
+         for (int i = 0; i < values.length; i++) {
+             if (i + 3 >= values.length) break;
+             for (int j = values[0].length - 1; j > values[0].length - 4; j--) {
+                 if (j - 3 < 0) break;
+                 else if (values[i][j] == values[i + 1][j - 1] && values[i][j] == values[i + 2][j - 2] && values[i][j] == values[i + 3][j - 3]) return true;
+             }
+         }
+         
+         if (values[0].length > 6) {
+             for (int i = 0; i < values.length; i++) {
+                 if (i + 3 >= values.length) break;
+                 for (int j = 3; j < values[0].length - 3; j++) {
+                     if ((values[i][j] == values[i + 1][j - 1] && values[i][j] == values[i + 2][j - 2] && values[i][j] == values[i + 3][j - 3])
+                             || (values[i][j] == values[i + 1][j + 1] && values[i][j] == values[i + 2][j + 2] && values[i][j] == values[i + 3][j + 3])) 
+                         return true;
+                 }
+             }
+         }
+         return false;
+     }
