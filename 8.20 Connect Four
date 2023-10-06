@@ -1,0 +1,112 @@
+public static void main(String[] args) {
+         char[][] board = new char[6][7];
+         Scanner input = new Scanner(System.in);
+         for (int i = 0; i < 6; i++) {
+             for (int j = 0; j < 7; j++) board[i][j] = ' ';
+         }
+         printBoard(board);
+         boolean match = false;
+         while (match == false) {
+             System.out.print("Drop a red disk at column (0-6): ");
+             int column = input.nextInt();
+             
+             while (column < 0 || column > 6) {
+                System.out.print("Drop a red disk at column (0-6): ");
+                column = input.nextInt();
+             }
+             
+             for (int i = 5; i >= 0; i--) {
+                 if (board[i][column] == ' ') {
+                     board[i][column] = 'R';
+                     printBoard(board);
+                     break;
+                 }
+             }
+             
+             match = isConsecutiveFour(board);
+             if (match == true) {
+                 System.out.println("Red wins!");
+                 System.exit(0);
+             }
+             
+             System.out.print("Drop a yellow disk at column (0-6): ");
+             column = input.nextInt();
+             while (column < 0 || column > 6) {
+                System.out.print("Drop a yellow disk at column (0-6): ");
+                column = input.nextInt();
+             }
+             
+             for (int i = 5; i >= 0; i--) {
+                 if (board[i][column] == ' ') {
+                     board[i][column] = 'Y';
+                     printBoard(board);
+                     break;
+                 }
+             }
+             
+             match = isConsecutiveFour(board);
+         }
+         printBoard(board);
+         System.out.println("Yellow wins!");
+      }
+     
+     public static void printBoard(char[][] board) {
+         for (char[] board1 : board) {
+             System.out.print("|");
+             for (int j = 0; j < board[0].length; j++) {
+                 System.out.print(board1[j]);
+                 System.out.print("|");
+             }
+             System.out.println();
+         }
+     }
+     
+     public static boolean isConsecutiveFour(char[][] values) { 
+         if (values[0].length >= 4) {
+            for (char[] value : values) {
+                for (int j = 0; j < value.length; j+=4) {
+                    if (j + 3 >= value.length) break;
+                    else if (value[j] == value[j+1] && value[j] == value[j+2] && value[j] == value[j+3] && value[j] != ' ') {
+                        return true;
+                    }
+                }
+            }
+         }
+ 
+         for (int i = 0; i < values.length - 3; i++) {
+                for (int j = 0; j < values[0].length; j++) {
+                    if (values[i][j] == values[i + 1][j] && values[i][j] == values[i + 2][j] && values[i][j] == values[i + 3][j] && values[i][j] != ' ') return true;      
+                }
+            }
+         
+         if (values.length >= 4 && values[0].length >= 4) {
+             for (int i = 0; i < values.length; i++) {
+                 if (i + 3 >= values.length) break;
+                 for (int j = 0; j < 3; j++) {
+                     if (j + 3 >= values[0].length) break;
+                     else if (values[i][j] == values[i + 1][j + 1] && values[i][j] == values[i + 2][j + 2] && values[i][j] == values[i + 3][j + 3] && values[i][j] != ' ') return true;
+                     
+                 }
+             }
+         }
+         
+         for (int i = 0; i < values.length; i++) {
+             if (i + 3 >= values.length) break;
+             for (int j = values[0].length - 1; j > values[0].length - 4; j--) {
+                 if (j - 3 < 0) break;
+                 else if (values[i][j] == values[i + 1][j - 1] && values[i][j] == values[i + 2][j - 2] && values[i][j] == values[i + 3][j - 3] && values[i][j] != ' ') return true;
+             }
+         }
+         
+         if (values[0].length > 6) {
+             for (int i = 0; i < values.length; i++) {
+                 if (i + 3 >= values.length) break;
+                 for (int j = 3; j < values[0].length - 3; j++) {
+                     if (((values[i][j] == values[i + 1][j - 1] && values[i][j] == values[i + 2][j - 2] && values[i][j] == values[i + 3][j - 3])
+                             || (values[i][j] == values[i + 1][j + 1] && values[i][j] == values[i + 2][j + 2] && values[i][j] == values[i + 3][j + 3])) && values[i][j] != ' ') 
+                         return true;
+                 }
+             }
+         }
+         return false;
+     }
