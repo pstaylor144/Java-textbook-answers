@@ -1,0 +1,45 @@
+public static void main(String[] args) {
+         Scanner input = new Scanner(System.in);
+         System.out.println("Enter a 3-by-3 matrix row by row: ");
+         double[][] matrix = new double[3][3];
+         for (int i = 0; i < 3; i++) {
+             for (int j = 0; j < 3; j++) matrix[i][j] = input.nextDouble();
+         }
+        
+         matrix = sortColumns(matrix);
+         System.out.println("The column-sorted array is");
+         for (double[] row: matrix) {
+             for (double n: row) System.out.print(n + " ");
+             System.out.println();
+         }
+     }
+     
+     public static double[][] sortColumns(double[][] m) {
+         double[][] sortedColumns = new double[3][3];
+         for (int i = 0; i < 3; i++) {
+             double[] array = new double[3];
+             for (int j = 0; j < 3; j++) array[j] = m[j][i];
+             bubbleSort(array);
+             sortedColumns[i] = array;
+         }
+         
+         for (int i = 0; i < 3; i++) {
+             for (int j = 0; j < 3; j++) m[j][i] = sortedColumns[i][j];
+         }
+         return m;
+     }
+     public static void bubbleSort(double[] list) {
+            double temp;
+            boolean swapped;
+            do {
+                swapped = false; 
+                for (int i = 0; i < list.length - 1; i++) {
+                        if (list[i] > list[i + 1]) {
+                                temp = list[i];
+                                list[i] = list[i + 1];
+                                list[i + 1] = temp;
+                                swapped = true;
+                        }
+                }
+            } while (swapped); 
+    }
