@@ -1,0 +1,24 @@
+public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        double[][] coefficients = new double[2][2];
+        System.out.print("Enter the 4 coefficients: ");
+        for (double [] coef : coefficients) {
+            for (int j = 0; j < coefficients.length; j++) {
+                coef[j] = input.nextInt();
+            }
+        }
+        double[] constants = new double[2];
+        System.out.print("Enter the constants: ");
+        for (int i = 0; i < constants.length; i++) constants[i] = input.nextInt();
+        
+        if (linearEquation(coefficients, constants) == null) System.out.println("The equation has no solution");
+        else System.out.println(Arrays.toString(linearEquation(coefficients, constants)));
+     }
+     
+     public static double[] linearEquation(double[][] a, double[] b) {
+         if (a[0][0] * a[1][1] - a[0][1] * a[1][0] == 0) return null;
+         double x = (b[0] * a[1][1] - b[1] * a[0][1]) / (a[0][0] * a[1][1] - a[0][1] * a[1][0]);
+         double y = (b[1] * a[0][0] - b[0] * a[1][0]) / (a[0][0] * a[1][1] - a[0][1] * a[1][0]);
+         double[] solutions = {x, y};
+         return solutions;
+     }
