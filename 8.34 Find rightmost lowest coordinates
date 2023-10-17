@@ -1,0 +1,21 @@
+public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        System.out.print("Enter 6 points: ");
+        double[][] coordinates = new double[6][2];
+        for (double[] point : coordinates) {
+            for (int j = 0; j < 2; j++) {
+                point[j] = input.nextDouble();
+            }
+        }
+        
+        System.out.println("The rightmost lowest point is " + Arrays.toString(getRightmostLowestPoint(coordinates)));
+     }
+     
+     public static double[] getRightmostLowestPoint(double[][] points) {
+         double x = -100;
+         double y = 100;
+         for (double[] point: points) if (point[1] < y) y = point[1];
+         for (double[] point: points) if (point[1] == y && point[0] > x) x = point[0];
+         double[] solution = {x, y};    
+         return solution;
+     }
