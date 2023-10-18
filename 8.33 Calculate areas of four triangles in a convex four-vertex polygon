@@ -1,0 +1,74 @@
+public static void main(String[] args) {
+         Scanner input = new Scanner(System.in);
+         System.out.print("Enter the four vertices: ");
+         double[][] vertices = new double[4][2];
+         for (double[] point: vertices)
+             for (int j = 0; j < 2; j++) point[j] = input.nextDouble();
+         
+         double[] intersection = getIntersectingPoint(vertices);
+         double[] areas = new double[4];
+         for (int i = 0; i < vertices.length; i++) {
+             double side1 = distance(vertices[i][0], vertices[i][1], intersection[0], intersection[1]);
+             double side2;
+             double side3;
+             if (i == vertices.length - 1) {
+                 side2 = distance(vertices[i][0], vertices[i][1], vertices[0][0], vertices[0][1]);
+                 side3 = distance(vertices[0][0], vertices[0][1], intersection[0], intersection[1]);
+             } else {
+                side2 = distance(vertices[i][0], vertices[i][1], vertices[i + 1][0], vertices[i + 1][1]);
+                side3 = distance(vertices[i + 1][0], vertices[i + 1][1], intersection[0], intersection[1]);
+             }
+             double s = (side1 + side2 + side3)/2;
+             double area = Math.sqrt(s * (s - side1) * (s - side2) * (s - side3));
+             areas[i] = area;
+         }
+         System.out.print("The areas are ");
+         bubbleSort(areas);
+         for (double a: areas) {
+             System.out.format("%.2f", a);
+             System.out.print(" ");
+         }
+         
+      }
+     
+     public static double[] getIntersectingPoint(double[][] points) {
+         double y1 = points[0][1];
+         double y2 = points[2][1];
+         double y3 = points[1][1];
+         double y4 = points[3][1];
+         double x1 = points[0][0];
+         double x2 = points[2][0];
+         double x3 = points[1][0];
+         double x4 = points[3][0];
+         double a = y1 - y2;
+         double b = -(x1 - x2);
+         double c = y3 - y4;
+         double d = -(x3 - x4);
+         if (a * d - b * c == 0) return null;
+         double e = (a * x1) + (b * y1);
+         double f = (c * x3) + (d * y3);
+         double x = (e * d - b * f) / (a * d - b * c);
+         double y = (a * f - e * c) / (a * d - b * c);
+         double[] point = {x, y};
+         return point;
+     }
+     
+     public static double distance(double x1, double y1, double x2, double y2) {
+         return Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
+     }
+     
+     public static void bubbleSort(double[] list) {
+            double temp;
+            boolean swapped;
+            do {
+                swapped = false; 
+                for (int i = 0; i < list.length - 1; i++) {
+                        if (list[i] > list[i + 1]) {
+                                temp = list[i];
+                                list[i] = list[i + 1];
+                                list[i + 1] = temp;
+                                swapped = true;
+                        }
+                }
+            } while (swapped);
+     }
