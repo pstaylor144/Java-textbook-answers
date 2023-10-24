@@ -1,0 +1,60 @@
+public static void main(String[] args) {
+         int rows = (int)(Math.random() * 10) + 2;
+         int columns = (int)(Math.random() * 10) + 2;
+         int[][] matrix = new int[rows][columns];
+         for (int i = 0; i < rows; i++)
+             for (int j = 0; j < columns; j++) matrix[i][j] = (int)(Math.round(Math.random()));
+
+        for (int[] row: matrix) {
+             for (int n: row) System.out.print(n + " ");
+             System.out.println();
+         }
+         if (findLargestBlock(matrix) != null) {
+             int[] solution = findLargestBlock(matrix);
+             
+             System.out.println("The maximum square submatrix is at (" + solution[0] + ", " + solution[1] + ") with size " + solution[2]);
+        }
+         
+     }
+     
+     public static int[] findLargestBlock(int[][] m) {
+         int[] square = new int[3];
+         int max;
+         if (m.length > m[0].length) max = m[0].length;
+         else max = m.length;
+         while (max >= 1) {
+             
+             for (int i = 0; (i + max) < m.length; i++) {
+                 for (int j = 0; (j + max) < m[0].length; j++) {
+                     boolean equals = true;
+                     if (m[i][j] == 1) {
+                         for (int col = j + 1; col <= j + max; col++) {
+                             if (m[i][j] != m[i][col]) {
+                                equals = false;
+                                break;
+                             } 
+                         }
+                         if (equals == false) continue;
+                         for (int row = i + 1; row <= i + max; row++) {
+                             for (int k = j; k <= j + max; k++) {
+                                 if (m[i][j] != m[row][k]) {
+                                     equals = false;
+                                     break;
+                                 } 
+                             }
+                         }
+                         
+                         if (equals == true) {
+                             square[0] = i;
+                             square[1] = j;
+                             square[2] = max + 1;
+                             return square;
+                         }
+                     }
+                 }                             
+             }           
+             max--;
+         }
+         
+         return null;
+     }
