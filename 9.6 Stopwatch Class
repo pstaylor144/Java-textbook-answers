@@ -1,0 +1,21 @@
+public class StopWatch {
+    private Date startTime;
+    private Date endTime;
+    
+    public StopWatch() {
+        startTime = new Date();
+    }
+    
+    public void start() {
+        Date newTime = new Date();
+        startTime = newTime;
+    }
+    
+    public void stop() {
+        endTime = new Date();
+    }
+    
+    public long getElapsedTime() {
+        return endTime.getTime() - startTime.getTime();
+    }
+}
