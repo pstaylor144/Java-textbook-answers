@@ -1,0 +1,62 @@
+public class RegularPolygon {
+    private int n = 3;
+    private double side = 1;
+    private double x = 0;
+    private double y = 0;
+    
+    public RegularPolygon() {
+        
+    }
+    
+    public RegularPolygon(int sides, double length) {
+        n = sides;
+        side = length;
+    }
+    
+    public RegularPolygon(int sides, double length, double x, double y) {
+        n = sides;
+        side = length;
+        this.x = x;
+        this.y = y;
+    }
+    
+    public int getSides() {
+        return n;
+    }
+    
+    public double getLength() {
+        return side;
+    }
+    
+    public double getX() {
+        return x;
+    }
+    
+    public double getY() {
+        return y;
+    }
+    
+    public void setSides(int sides) {
+        n = sides;
+    }
+    
+    public void setLength(double length) {
+        side = length;
+    }
+    
+    public void setX(double x) {
+        this.x = x;
+    }
+    
+    public void setY(double y) {
+        this.y = y;
+    }
+    
+    public double getPerimeter() {
+        return n * side;
+    }
+    
+    public double getArea() {
+        return (n * Math.pow(side, 2)) / (4 * Math.tan(Math.PI / n));
+    }
+}
