@@ -1,0 +1,32 @@
+public class Location {
+    public int row;
+    public int column;
+    public double maxValue = 0;
+    
+    public Location(int row, int column, double maxValue) {
+        this.row = row;
+        this.column = column;
+        this.maxValue = maxValue;
+    }
+    
+    public static Location locateLargest(double[][] a) {
+        int[] array = new int[2];
+        double max = 0;
+        for (int i = 0; i < a.length; i++) {
+            for (int j = 0; j < a[i].length; j++) {
+                if (a[i][j] > max) {
+                    max = a[i][j];
+                    array[0] = i;
+                    array[1] = j;
+                }
+            }
+        }
+        Location solution = new Location(array[0], array[1], max);
+        return solution;
+    }
+    
+    @Override
+    public String toString() {
+        return "The location of the largest elements is " + maxValue + " at (" + row + ", " + column + ")";
+    }
+}
