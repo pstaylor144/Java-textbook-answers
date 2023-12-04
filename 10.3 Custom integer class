@@ -1,0 +1,66 @@
+public class MyInteger {
+    private final int VALUE;
+    
+    public MyInteger(int value) {
+        this.VALUE = value;
+    }
+    
+    public int getValue() {
+        return VALUE;
+    }
+    
+    public boolean isEven() {
+        return VALUE % 2 == 0;
+    }
+    
+    public boolean isOdd() {
+        return VALUE % 2 == 1;
+    }
+    
+    public boolean isPrime() {
+        int i = 1;
+        int sumOfFactors = 0; 
+        while (i <= VALUE / 2) {
+           if (VALUE % i == 0)
+               sumOfFactors++;
+           i++;         
+        }       
+        return !(sumOfFactors > 2 || VALUE <= 1);
+    }
+    
+    public static boolean isEven(int number) {
+        return number % 2 == 0;
+    }
+    
+    public static boolean isOdd(int number) {
+        return number % 2 == 1;
+    }
+    
+    public static boolean isPrime(int number) {
+        int i = 1;
+        int sumOfFactors = 0; 
+        while (i <= number / 2) {
+           if (number % i == 0)
+               sumOfFactors++;
+           i++;         
+        }       
+        return !(sumOfFactors > 2 || number <= 1);
+    }
+    
+    public boolean equals(int number) {
+        return VALUE == number;
+    }
+    
+    public boolean equals(MyInteger number) {
+        return VALUE == number.getValue();
+    }
+    
+    public static int parseInt(char[] chars) {
+        String combined = String.valueOf(chars);
+        return Integer.parseInt(combined);
+    }
+    
+    public static int parseInt(String number) {
+        return Integer.parseInt(number);
+    }
+}
