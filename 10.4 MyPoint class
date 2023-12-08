@@ -1,0 +1,32 @@
+public class MyPoint {
+    private final double x;
+    private final double y;
+    
+    public MyPoint() {
+        x = 0;
+        y = 0;
+    }
+    public MyPoint(double x, double y) {
+        this.x = x;
+        this.y = y;
+    }
+    
+    public double getX() {
+        return x;
+    }
+    
+    public double getY() {
+        return y;
+    }
+    public double distance(MyPoint point) {
+        return Math.sqrt((point.getX() - x) * (point.getX() - x) + (point.getY() - y) * (point.getY() - y));
+    }
+    
+    public double distance(double x, double y) {
+        return Math.sqrt((x - this.x) * (x - this.x) + (y - this.y) * (y - this.y));
+    }
+    
+    public static double distance(MyPoint p1, MyPoint p2) {
+        return Math.sqrt((p1.getX() - p2.getX()) * (p1.getX() - p2.getX()) + (p1.getY() - p2.getY()) * (p1.getY() - p2.getY()));
+    }
+}
