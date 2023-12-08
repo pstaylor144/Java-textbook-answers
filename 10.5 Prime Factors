@@ -1,0 +1,33 @@
+public static Stack primeFactors(int n) {
+      boolean negative = n < 0;
+      int absolute = Math.abs(n);
+      int[] factors = new int[30];
+      for (int num: factors) factors[num] = 0;
+      int index = 0;
+      for (int i = 2; i <= absolute / 2; i++) {
+          if (absolute % i == 0) {
+              factors[index] = i;
+              index++;
+          }
+      }
+      if (factors[0] != 0) {
+          Stack integers = new Stack();
+          int quotient = absolute;
+          for (int i = 0; i <= index; i++) {
+              if (factors[i] > 0) {
+                  while (quotient % factors[i] == 0) {
+
+                      if (negative && quotient == absolute) {
+                          quotient /= factors[i];
+                          integers.add(factors[i] * - 1);
+                      } else {
+                          quotient /= factors[i];
+                          integers.add(factors[i]);
+                      }
+                  } 
+              }
+          }
+          return integers;
+      }
+      return null;
+  }
