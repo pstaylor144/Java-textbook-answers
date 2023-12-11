@@ -1,0 +1,50 @@
+class Course {
+    private String COURSE_NAME;
+    private String[] students = new String[100];
+    private int numberOfStudents;
+    
+    public Course(String courseName) {
+        this.COURSE_NAME = courseName;
+    }
+    
+    public void addStudent(String student) {
+        if (numberOfStudents == students.length) {
+            String[] newArray = new String[students.length + 1];
+            System.arraycopy(students, 0, newArray, 0, students.length - 1);
+            students = newArray;
+        }
+        students[numberOfStudents] = student;
+        numberOfStudents++;
+    }
+    
+    public String[] getStudents() {
+        return students;
+    }
+    
+    public int getNumberOfStudents() {
+        return numberOfStudents;
+    }
+    
+    public String getCourseName() {
+        return COURSE_NAME;
+    }
+    
+    public void dropStudent(String student) {
+        ArrayList validStudents = new ArrayList();
+        for (String student1 : students) {
+            if (student1 != student) {
+                validStudents.add(student1);
+            }
+        }
+        
+        String[] newArray = new String[students.length - 1];
+        for (int i = 0; i < newArray.length; i++) {
+            newArray[i] = (String) validStudents.get(i);
+        }
+        students = newArray;
+    }
+    
+    public void clear() {
+        for (int i = 0; i < students.length; i++) students[i] = null;
+    }
+}
