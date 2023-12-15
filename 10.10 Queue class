@@ -1,0 +1,38 @@
+public class Queue {
+    int size;
+    int[] queue = new int[size];
+    int counter = 0;
+    public Queue() {
+        size = 8;
+    }
+    
+    public void enqueue(int n) {
+        if (counter == queue.length) {
+            size *= 2;
+            int[] temp = new int[size];
+            System.arraycopy(queue, 0, temp, 0, queue.length);
+            queue = temp;
+        }
+        queue[counter] = n;
+        counter++;
+    }
+    
+    public void dequeue() {
+        for (int i = 0; i < queue.length - 1; i++) {
+            queue[i] = queue[i + 1];
+        }
+        queue[queue.length - 1] = 0;
+    }
+    
+    public boolean isEmpty() {
+        return (queue[0] == 0);
+    }
+    
+    public int getSize() {
+        return queue.length;
+    }
+    
+    public int[] getQueue() {
+        return queue;
+    }
+}
