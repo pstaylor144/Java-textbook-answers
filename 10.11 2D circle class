@@ -1,0 +1,59 @@
+public class Circle2D {
+    private final double x;
+    private final double y;
+    double radius;
+    
+    public Circle2D() {
+        x = 0;
+        y = 0;
+        radius = 1;
+    }
+    
+    public Circle2D(double x, double y, double radius) {
+        this.x = x;
+        this.y = y;
+        this.radius = radius;
+    }
+    
+    public double getArea() {
+        return Math.PI * radius * radius;
+    }
+    
+    public double getPerimeter() {
+        return 2 * Math.PI * radius;
+    }
+    
+    public double getRadius() {
+        return radius;
+    }
+    
+    public double getX() {
+        return x;
+    }
+    
+    public double getY() {
+        return y;
+    }
+    
+    public boolean contains(double x, double y) {
+        double xMin = this.x - radius;
+        double xMax = this.x + radius;
+        double yMin = this.y - radius;
+        double yMax = this.y + radius;
+        return (x >= xMin && x <= xMax && y >=yMin && y <= yMax);
+    }
+    
+    public boolean contains(Circle2D circle) {
+        if (x + radius > circle.getX() + circle.getRadius() && x - radius < circle.getX() - circle.getRadius())
+            if (y + radius > circle.getY() + circle.getRadius() && y - radius < circle.getY() - circle.getRadius())
+                return true;
+        return false;
+    }
+    
+    public boolean overlaps(Circle2D circle) {
+        if (!contains(circle)) 
+            if (contains(circle.getX(), circle.getY()))
+                return true;
+        return false;
+    }
+}
