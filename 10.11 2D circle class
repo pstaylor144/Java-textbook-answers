@@ -1,3 +1,4 @@
+// Useful tool: https://www.geogebra.org/m/k43yRhne
 public class Circle2D {
     private final double x;
     private final double y;
