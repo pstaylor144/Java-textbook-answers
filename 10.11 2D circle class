@@ -40,7 +40,7 @@ public class Circle2D {
         double xMax = this.x + radius;
         double yMin = this.y - radius;
         double yMax = this.y + radius;
-        return (x >= xMin && x <= xMax && y >=yMin && y <= yMax);
+        return (x >= xMin && x <= xMax && y >= yMin && y <= yMax);
     }
     
     public boolean contains(Circle2D circle) {
