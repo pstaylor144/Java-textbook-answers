@@ -1,0 +1,30 @@
+public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        ArrayList<Integer> list1 = new ArrayList<>();
+        System.out.print("Enter the first list: ");
+        String[] numbers = input.nextLine().split(" ");
+        
+        for (String number: numbers) {
+            list1.add(Integer.parseInt(number));
+        }
+        
+        ArrayList<Integer> list2 = new ArrayList<>();
+        System.out.print("Enter the second list: ");
+        numbers = input.nextLine().split(" ");
+        
+        for (String number: numbers) {
+            list2.add(Integer.parseInt(number));
+        }
+        
+        System.out.println("The union is " + union(list1, list2));
+    }
+    public static ArrayList<Integer> union(ArrayList<Integer> list1, ArrayList<Integer> list2) {
+        ArrayList<Integer> list3 = new ArrayList<>();
+        list1.forEach((number) -> {
+            list3.add(number);
+        });
+        list2.forEach((number) -> {
+            list3.add(number);
+        });
+        return list3;
+    }
