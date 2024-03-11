@@ -1,0 +1,28 @@
+public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        System.out.print("Enter a year: ");
+        int year = input.nextInt();
+        System.out.print("Enter a month: ");
+        int month = input.nextInt();
+        System.out.println("---------------------------");
+        System.out.println("Sun Mon Tue Wed Thu Fri Sat");
+        Calendar period = new GregorianCalendar(year, month - 1, 1);
+        int startDay = period.get(Calendar.DAY_OF_WEEK);
+        int daysInMonth = period.getActualMaximum(Calendar.DAY_OF_MONTH);
+        int counter = 0;
+        
+        for (int i = 1; i < startDay; i++) {
+            System.out.print("    ");
+            counter++;
+        }
+        
+        for (int j = 1; j <= daysInMonth; j++) {
+            if (j < 10) System.out.print(j + "   ");
+            else System.out.print(j + "  ");
+            counter++;
+            if (counter % 7 == 0) {
+                counter = 0;
+                System.out.println();
+            }
+        }
+    }
