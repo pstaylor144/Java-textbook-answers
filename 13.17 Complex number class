@@ -1,0 +1,65 @@
+public class Complex implements Cloneable, Comparable {
+    private final double a;
+    private final double b;
+    
+    public Complex() {
+        a = 0;
+        b = 0;
+    }
+    
+    public Complex(double a) {
+        this.a = a;
+        b = 0;
+    }
+    
+    public Complex(double a, double b) {
+        this.a = a;
+        this.b = b;
+    }
+    
+    public String getRealPart() {
+        return Double.toString(a);
+    }
+    
+    public String getImaginaryPart() {
+        return b + "i";
+    }
+    
+    public double getA() {
+        return a;
+    }
+    
+    public double getB() {
+        return b;
+    }
+    
+    public String Add(Complex number) {
+        return (this.getA() + number.getA()) + " + " + (this.getB() + number.getB()) + "i";
+    }
+    
+    public String Subtract(Complex number) {
+        return (this.getA() - number.getA()) + " + " + (this.getB() - number.getB()) + "i";
+    }
+    
+    public String Multiply(Complex number) {
+        double ac = this.getA() * number.getA();
+        double bd = this.getB() * number.getB();
+        double bc = this.getB() * number.getA();
+        double ad = this.getA() * number.getB();
+        return (ac - bd) + " + " + (bc + ad) + "i";
+    }
+    
+    public String Divide(Complex number) {
+        double ac = this.getA() * number.getA();
+        double bd = this.getB() * number.getB();
+        double bc = this.getB() * number.getA();
+        double ad = this.getA() * number.getB();
+        return ((ac + bd) / (Math.pow(number.getA(), 2) + Math.pow(number.getB(), 2))) + " + " + ((bc - ad) / (Math.pow(number.getA(), 2) + Math.pow(number.getB(), 2))) + "i";
+    }
+    
+    @Override
+    public int compareTo(Object o) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+}
